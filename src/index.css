@@ -96,9 +96,27 @@ button {
   }
 }
 
+@keyframes logoPulse {
+  from {
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5), 0 0 20px rgba(200, 255, 61, 0.1);
+  }
+  to {
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(200, 255, 61, 0.25);
+  }
+}
+
+.logo-pulse {
+  animation: logoPulse 2.5s ease-in-out infinite alternate;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .logo-marquee,
   .logo-marquee-reverse {
     animation-duration: 80s;
+  }
+
+  .logo-pulse {
+    animation: none;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5), 0 0 30px rgba(200, 255, 61, 0.15);
   }
 }

@@ -17,7 +17,7 @@ function HeroButton({ children, href, variant = "light" }) {
   const styles =
     variant === "light"
       ? "border-white bg-white text-[#070707] hover:border-[#b7ff2a] hover:bg-[#b7ff2a]"
-      : "border-white/20 text-white hover:border-[#b7ff2a] hover:text-[#b7ff2a]";
+      : "border-[rgba(255,255,255,0.35)] text-white hover:border-[#b7ff2a] hover:text-[#b7ff2a]";
 
   return (
     <a
@@ -68,7 +68,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-[1] bg-black/20 pointer-events-none" />
       <div className="pointer-events-none absolute bottom-0 inset-x-0 z-[2] h-32 bg-gradient-to-b from-transparent to-[#050505]" />
 
-      <div className="hero-content relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col items-center justify-start px-5 pb-[190px] pt-[118px] text-center sm:px-6 md:min-h-0 lg:h-[calc(100vh-80px)] lg:justify-center lg:px-8 lg:pb-4 lg:pt-12">
+      <div className="hero-content relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col items-center justify-start px-5 pb-[210px] pt-[118px] text-center sm:px-6 md:min-h-0 lg:h-[calc(100vh-80px)] lg:justify-center lg:px-8 lg:pb-4 lg:pt-12">
         <motion.div
           className="mx-auto flex w-full min-w-0 max-w-6xl flex-col items-center"
           initial="hidden"
@@ -76,12 +76,19 @@ export default function Hero() {
           variants={fadeUp}
           transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
         >
+          <motion.p
+            className="mb-3 font-mono text-[0.7rem] tracking-[0.2em] text-[rgba(255,255,255,0.45)]"
+            variants={fadeUp}
+            transition={{ duration: 0.72, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
+          >
+            — Studio Creativo Digitale
+          </motion.p>
           <motion.h1
-            className="flex w-screen max-w-[100vw] flex-col gap-y-1 uppercase tracking-[-0.04em] text-white sm:w-full sm:max-w-[calc(100vw-40px)] sm:gap-y-0 sm:text-[clamp(2.5rem,7vw,4.6rem)] sm:leading-[0.9] lg:max-w-[1100px] lg:text-[clamp(4rem,6vw,6rem)]"
+            className="flex w-screen max-w-[100vw] flex-col gap-y-1 uppercase tracking-[-0.04em] text-white sm:w-full sm:max-w-[calc(100vw-40px)] sm:gap-y-0 sm:text-[clamp(2.5rem,7vw,4.6rem)] sm:leading-[0.9] lg:max-w-[1100px] lg:gap-y-3 lg:text-[clamp(4rem,6vw,6rem)]"
             variants={fadeUp}
             transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="block text-[clamp(1.9rem,7.4vw,2.6rem)] font-extrabold leading-[0.95] text-white sm:text-[inherit] sm:font-bold sm:leading-[inherit]">CREIAMO</span>
+            <span className="block text-[clamp(1.9rem,7.4vw,2.6rem)] font-extrabold leading-[0.95] text-white sm:text-[inherit] sm:font-bold sm:leading-[inherit] lg:text-[clamp(3.8rem,5.5vw,5.8rem)]">CREIAMO</span>
             <span className="relative mx-auto my-0 grid h-[0.98em] w-full max-w-full place-items-center text-[clamp(2.45rem,9.6vw,3.4rem)] font-black leading-[0.9] tracking-[-0.04em] text-[#B7FF2A] sm:text-[clamp(2.8rem,8vw,4.8rem)] lg:text-[clamp(3.6rem,5.5vw,5.5rem)]">
               <AnimatePresence mode="wait">
                 <motion.span
@@ -104,7 +111,7 @@ export default function Hero() {
             </span>
           </motion.h1>
           <motion.div
-            className="hero-actions mb-0 mt-8 flex w-[calc(100vw-40px)] max-w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row lg:mt-4 lg:max-w-none"
+            className="hero-actions mb-0 mt-8 flex w-[calc(100vw-40px)] max-w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row lg:mt-12 lg:max-w-none"
             variants={fadeUp}
             transition={{ duration: 0.72, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
           >
@@ -142,6 +149,15 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
+      <motion.div
+        className="absolute bottom-6 left-5 z-10 hidden lg:block pointer-events-none"
+        initial="hidden"
+        animate="visible"
+        variants={fadeUp}
+        transition={{ duration: 0.72, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <span className="font-mono text-[0.7rem] text-[rgba(255,255,255,0.4)]">✦ 48+ progetti completati</span>
+      </motion.div>
       <div className="md:hidden absolute left-1/2 bottom-[62px] z-20 h-[120px] w-[120vw] -translate-x-1/2 overflow-visible flex items-center justify-center pointer-events-none">
         <CurvedLoop
           marqueeText="CREATIVE ✦ AGENCY ✦ STUDIO ✦ DESIGN ✦ "

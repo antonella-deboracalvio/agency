@@ -1,94 +1,192 @@
-.mobile-slanted-gallery {
-  position: relative;
+/* ────────────────────────────────────────────
+   Mobile portfolio — 3 horizontal carousels
+   Hidden at ≥ 768 px (desktop uses ManifestoDesktop)
+   ──────────────────────────────────────────── */
+
+.portfolio-mobile {
   display: block;
-  width: 100%;
   background: #050505;
-  overflow: hidden;
-  padding: 12px 0 24px;
+  padding: 44px 0 60px;
 }
 
-.mobile-slanted-gallery__viewport {
-  position: relative;
-  width: 100%;
-  height: clamp(500px, 132vw, 560px);
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  padding: 0 4px;
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 7%,
-    #000 93%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 7%,
-    #000 93%,
-    transparent 100%
-  );
+/* ── Section header ── */
+.portfolio-mobile__header {
+  padding: 0 20px;
+  margin-bottom: 36px;
 }
 
-.mobile-slanted-gallery__lane {
-  position: relative;
-  width: min(46vw, 178px);
-  height: calc(100% + 150px);
-  overflow: visible;
-  transform-origin: center;
+.portfolio-mobile__eyebrow {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c8ff3d;
+  margin: 0 0 10px;
 }
 
-.mobile-slanted-gallery__lane--left,
-.mobile-slanted-gallery__lane--right {
-  transform: rotate(9deg);
+.portfolio-mobile__title {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0;
 }
 
-.mobile-slanted-gallery__track {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  will-change: transform;
-  padding: 14px 0;
+/* ── Category group ── */
+.portfolio-mobile__group {
+  margin-bottom: 44px;
 }
 
-.mobile-slanted-gallery__card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #0a0a0a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.34);
-  transform: rotate(-9deg);
+.portfolio-mobile__group:last-child {
+  margin-bottom: 0;
 }
 
-.mobile-slanted-gallery__card-image {
-  display: block;
-  width: 100%;
-  height: 154px;
-  object-fit: cover;
-  object-position: center;
-}
-
-.mobile-slanted-gallery__card-content {
-  position: absolute;
-  inset: auto 0 0;
-  padding: 18px 10px 9px;
-  background: linear-gradient(to top, rgba(5, 5, 5, 0.86), rgba(5, 5, 5, 0));
-}
-
-.mobile-slanted-gallery__card-label {
-  display: inline-block;
-  color: #a7ef00;
-  font-size: 0.56rem;
+.portfolio-mobile__group-label {
+  padding: 0 20px;
+  margin: 0 0 14px;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
 }
 
+/* ── Carousel wrapper ── */
+.carousel-wrap {
+  /* stacks track + dots */
+}
+
+/* ── Scroll track ── */
+.carousel {
+  display: flex;
+  gap: 14px; /* must match CARD_GAP in JSX */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* 20px left padding creates the visual indent;
+     scroll-padding-left matches so snap aligns correctly */
+  padding: 6px 20px 10px;
+  scroll-padding-left: 20px;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Card ── */
+.carousel-card {
+  flex: 0 0 82vw;
+  max-width: 340px;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+/* subtle corner glow for colour depth */
+.carousel-card__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 70% 20%,
+    rgba(255, 255, 255, 0.06) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* dark gradient so text stays readable */
+.carousel-card__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.28) 45%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* text overlay */
+.carousel-card__body {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 22px 22px 26px;
+  z-index: 3;
+}
+
+.carousel-card__tag {
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #c8ff3d;
+  margin-bottom: 8px;
+}
+
+.carousel-card__name {
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* ── Navigation dots ── */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 20px 2px;
+}
+
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 0;
+  cursor: pointer;
+  transition:
+    width 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.28s ease;
+}
+
+.carousel-dot--active {
+  width: 20px;
+  border-radius: 4px;
+  background: #c8ff3d;
+}
+
+/* ── Desktop: section hidden, ManifestoDesktop takes over ── */
 @media (min-width: 768px) {
-  .mobile-slanted-gallery {
+  .portfolio-mobile {
     display: none;
   }
 }

@@ -5,11 +5,11 @@ import { useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import clsx from "clsx";
 import Hero from "./components/Hero";
-import MagicBento from "./components/MagicBento/MagicBento";
+import EditorialServicesShowcase from "./components/EditorialServicesShowcase";
 import MobileSlantedPortfolioGallery from "./components/MobileSlantedPortfolioGallery";
 import MobileServiceScrollCards from "./components/MobileServiceScrollCards";
 import Orb from "./components/Orb/Orb";
-import PhoneShowcase from "./components/PhoneShowcase";
+import WhyChooseUs from "./components/WhyChooseUs";
 import approach1 from "./assets/1.png";
 import approach2 from "./assets/2.png";
 import approach3 from "./assets/3.png";
@@ -213,8 +213,10 @@ const toolRows = [
   { reverse: true, top: "55%", shift: "-40px" },
   { reverse: false, top: "78%", shift: "-190px" },
 ];
+const rowSpeeds = ["40s", "20s", "30s", "25s"];
 
 const logoIcons = [WandSparkles, PenTool, Palette, Shapes, Sparkles];
+const logoLabels = ["Brand Identity", "Visual Design", "Logo System", "Style Guide", "Creative Direction"];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -380,7 +382,7 @@ function Services() {
       <MobileServiceScrollCards services={services} />
 
       <div className="mt-10 hidden md:block">
-        <MagicBento items={services} />
+        <EditorialServicesShowcase />
       </div>
     </Section>
   );
@@ -603,14 +605,15 @@ function BrandLogos() {
                   "flex w-max gap-[14px] md:gap-[22px]",
                   row.reverse ? "logo-marquee-reverse" : "logo-marquee",
                 )}
-                style={{ marginLeft: row.shift }}
+                style={{ marginLeft: row.shift, animationDuration: rowSpeeds[rowIndex] }}
               >
                 {loopIcons.map(({ icon: Icon, color }, index) => (
                   <div
                     key={`${rowIndex}-${index}`}
                     className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.06] shadow-[0_18px_46px_rgba(0,0,0,0.24)] backdrop-blur-[2px] md:h-[92px] md:w-[92px]"
+                    style={{ opacity: 0.18 }}
                   >
-                    <Icon className="h-5 w-5 opacity-[0.58] md:h-8 md:w-8" style={{ color }} strokeWidth={1.6} />
+                    <Icon className="h-5 w-5 md:h-8 md:w-8" style={{ color: "#c8ff3d", filter: "brightness(0.9) drop-shadow(0 0 6px rgba(200,255,61,0.15))" }} strokeWidth={1.6} />
                   </div>
                 ))}
               </div>
@@ -619,12 +622,11 @@ function BrandLogos() {
         })}
       </div>
 
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,rgba(5,5,5,0.92)_0%,rgba(5,5,5,0.76)_34%,rgba(5,5,5,0.22)_66%,rgba(5,5,5,0.64)_100%)]" />
       <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b from-[#050505] to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-28 bg-gradient-to-t from-[#050505] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#050505] to-transparent md:w-40" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#050505] to-transparent md:w-40" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[120px] bg-gradient-to-r from-[#050505] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[120px] bg-gradient-to-l from-[#050505] to-transparent" />
 
       <motion.div
         className="relative z-20 mx-auto flex w-full max-w-2xl flex-col items-center px-5 py-14 text-center sm:px-6"
@@ -634,23 +636,38 @@ function BrandLogos() {
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-[26px] border border-white/15 bg-white/[0.08] text-[#C8FF3D] shadow-[0_20px_80px_rgba(0,0,0,0.5),0_0_44px_rgba(200,255,61,0.16)] backdrop-blur-md md:h-24 md:w-24">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeLogoIcon}
-              className="flex h-full w-full items-center justify-center drop-shadow-[0_0_18px_rgba(200,255,61,0.42)]"
-              initial={{ opacity: 0, scale: 0.72, rotate: -8, filter: "blur(8px)" }}
-              animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 1.18, rotate: 8, filter: "blur(10px)" }}
-              transition={{ duration: 0.32, ease: "easeOut" }}
-            >
-              <ActiveIcon className="h-9 w-9 md:h-11 md:w-11" strokeWidth={1.55} />
-            </motion.div>
-          </AnimatePresence>
+        <div className="relative">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,255,61,0.08)_0%,transparent_70%)]" />
+          <div className="logo-pulse relative z-10 flex h-24 w-24 items-center justify-center overflow-hidden rounded-[26px] border border-[rgba(200,255,61,0.3)] bg-[#0a0a0c] text-[#C8FF3D] backdrop-blur-md md:h-[120px] md:w-[120px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeLogoIcon}
+                className="flex h-full w-full items-center justify-center drop-shadow-[0_0_18px_rgba(200,255,61,0.42)]"
+                initial={{ opacity: 0, scale: 0.72, rotate: -8, filter: "blur(8px)" }}
+                animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 1.18, rotate: 8, filter: "blur(10px)" }}
+                transition={{ duration: 0.32, ease: "easeOut" }}
+              >
+                <ActiveIcon className="h-9 w-9 md:h-11 md:w-11" strokeWidth={1.55} />
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={activeLogoIcon}
+            className="mt-3 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#c8ff3d]"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.32, ease: "easeOut" }}
+          >
+            {logoLabels[activeLogoIcon]}
+          </motion.p>
+        </AnimatePresence>
 
-        <p className="mt-7 text-xs font-semibold uppercase tracking-[0.24em] text-[#C8FF3D]">LOGHI CHE LASCIANO IL SEGNO</p>
-        <h2 className="mx-auto mt-4 max-w-xl text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
+        <p className="mt-7 mb-3 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[#C8FF3D]">LOGHI CHE LASCIANO IL SEGNO</p>
+        <h2 className="mx-auto mt-4 max-w-xl text-4xl font-extrabold leading-tight tracking-[-0.02em] text-white sm:text-5xl">
           Identità visive che
           <br />
           restano in testa.
@@ -793,7 +810,7 @@ export default function App() {
         <Services />
         <Manifesto />
         <BrandLogos />
-        <PhoneShowcase />
+        <WhyChooseUs />
         <Pricing />
         <Team />
         <FinalCta />
